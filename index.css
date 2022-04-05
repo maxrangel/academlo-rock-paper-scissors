@@ -119,3 +119,11 @@ body {
 	background-color: #f85555ce;
 	color: white;
 }
+
+.disabled,
+.disabled:hover {
+	cursor: default;
+	background-color: #dcd9d9;
+	border-color: #4f4f4f;
+	color: #4f4f4fc1;
+}
