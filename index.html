@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./index.css" />
+		<title>Rock Paper Scissors Game</title>
+	</head>
+	<body>
+		<!-- Header -->
+		<nav class="header">
+			<h3 class="header__title">Rock Paper Scissors</h3>
+		</nav>
+		<!-- End of header -->
+
+		<!-- Container -->
+		<div class="container">
+			<!-- Victories counters row -->
+			<div class="counters-row">
+				<div class="victory-counter">
+					<p class="score-title">Player #1</p>
+					<p class="score-label">0</p>
+				</div>
+				<div class="time-counter">
+					<p class="timer">5.00</p>
+				</div>
+				<div class="victory-counter">
+					<p class="score-title">Player #2</p>
+					<p class="score-label">0</p>
+				</div>
+			</div>
+			<!-- End of victories counters row -->
+
+			<!-- Players cards container -->
+			<div class="players-row">
+				<div class="player-card">
+					<img src="./assets/paper.png" alt="Img" class="player-choice" />
+
+					<p class="options-label">Pick your option</p>
+					<div class="options-row">
+						<img src="./assets/rock.png" alt="Img" class="img-option" />
+						<img
+							src="./assets/paper.png"
+							alt="Img"
+							class="img-option selected"
+						/>
+						<img src="./assets/scissors.png" alt="Img" class="img-option" />
+					</div>
+				</div>
+				<div class="actions-column">
+					<button class="button start">Start game</button>
+					<button class="button reset">Reset</button>
+				</div>
+				<div class="player-card">
+					<img src="./assets/rock.png" alt="Img" class="player-choice" />
+				</div>
+			</div>
+			<!-- End of players cards container -->
+		</div>
+		<!-- End of container -->
+	</body>
+</html>

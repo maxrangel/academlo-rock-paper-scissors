@@ -1,0 +1,121 @@
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+body {
+	box-sizing: border-box;
+	background-color: #ece9e9;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.header {
+	width: 100%;
+	background-color: #f85555;
+}
+
+.header__title {
+	color: white;
+	font-weight: bold;
+	font-size: 32px;
+	padding: 15px 20px;
+}
+
+.container {
+	border: 3px solid #f85555;
+	border-radius: 25px;
+	margin: 0 auto;
+	margin-top: 50px;
+	padding: 30px 0;
+	width: 80%;
+}
+
+.counters-row,
+.players-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.victory-counter {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	border: 2px solid #f85555;
+	border-radius: 25px;
+	padding: 18px 30px;
+}
+
+.score-title,
+.score-label,
+.timer,
+.button {
+	font-size: 24px;
+	color: #4f4f4f;
+}
+
+.options-label {
+	font-size: 20px;
+	color: #4f4f4f;
+	text-align: center;
+}
+
+.score-title,
+.button {
+	font-weight: bold;
+}
+
+.player-choice {
+	margin: 0 auto;
+}
+
+.actions-column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	height: 200px;
+}
+
+.options-row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+
+	width: 100%;
+}
+
+.img-option {
+	height: 75px;
+	width: 75px;
+}
+
+.selected,
+.img-option:hover {
+	background-color: #f85555;
+	border-radius: 25px;
+}
+
+.button,
+.img-option {
+	cursor: pointer;
+}
+
+.button {
+	background: none;
+
+	border: 2px solid #f85555;
+	width: fit-content;
+	padding: 5px 15px;
+	border-radius: 25px;
+}
+
+.button:hover {
+	background-color: #f85555ce;
+	color: white;
+}
