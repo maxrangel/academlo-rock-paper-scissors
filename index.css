@@ -127,3 +127,7 @@ body {
 	border-color: #4f4f4f;
 	color: #4f4f4fc1;
 }
+
+.hidden {
+	display: none;
+}

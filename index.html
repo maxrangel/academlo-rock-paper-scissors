@@ -34,7 +34,7 @@
 
 			<!-- Players cards container -->
 			<div class="players-row">
-				<div class="player-card">
+				<div class="player-card hidden">
 					<img src="./assets/paper.png" alt="Img" class="player-choice" />
 
 					<p class="options-label">Pick your option</p>
@@ -48,12 +48,14 @@
 						<img src="./assets/scissors.png" alt="Img" class="img-option" />
 					</div>
 				</div>
+
 				<div class="actions-column">
-					<button class="button start">Start game</button>
+					<button id="btn-start" class="button start">Start game</button>
 					<button class="button stop disabled">Stop game</button>
 					<button class="button reset">Reset</button>
 				</div>
-				<div class="player-card">
+
+				<div class="player-card hidden">
 					<img src="./assets/rock.png" alt="Img" class="player-choice" />
 				</div>
 			</div>
@@ -61,5 +63,6 @@
 		</div>
 		<!-- End of container -->
 	</body>
+
 	<script src="./index.js"></script>
 </html>
