@@ -1,5 +1,7 @@
 // DOM - Document Object Model (Modelo del Objeto documento)
 const btnStart = document.getElementById('btn-start');
+const btnStop = document.getElementById('btn-stop');
+const btnReset = document.getElementById('btn-reset');
 const playerCards = document.querySelectorAll('.player-card');
 const timer = document.getElementById('timer');
 
@@ -32,6 +34,10 @@ btnStart.addEventListener('click', () => {
 	});
 
 	game.started = true;
+	btnStart.classList.add('disabled');
+	btnStop.classList.remove('disabled');
+	btnReset.classList.add('disabled');
+
 	startTimer();
 });
 
