@@ -3,36 +3,35 @@ const btnStart = document.getElementById('btn-start');
 const playerCards = document.querySelectorAll('.player-card');
 const timer = document.getElementById('timer');
 
-const startTimer = () => {
-	let seconds = 5;
+// Variables
+const game = {
+	started: false,
+};
 
+// Default parameters
+const startTimer = (seconds = 5) => {
 	setTimeout(() => {
-		seconds = seconds - 1;
-		timer.innerText = seconds;
+		const remainingSeconds = seconds - 1;
+
 		// Recursividad / Recursivity
+		if (remainingSeconds >= 0) {
+			timer.innerText = remainingSeconds;
+			startTimer(remainingSeconds);
+		}
 	}, 1000);
-
-	// Scope
-	// setInterval(() => {
-	// 	seconds = seconds - 1;
-
-	// 	if (seconds >= 0) {
-	// 		timer.innerText = seconds;
-	// 	}
-
-	// 	console.log('Hello');
-	// 	if (seconds === 0) clearInterval(id);
-	// }, 1000);
 };
 
 // Callback/anonymous functions
 btnStart.addEventListener('click', () => {
+	if (game.started) return;
+
 	// Show the players' cards
 	playerCards.forEach(element => {
 		// Remove the hidden class from each element
 		element.classList.remove('hidden');
 	});
 
+	game.started = true;
 	startTimer();
 });
 
@@ -45,4 +44,16 @@ btnStart.addEventListener('click', () => {
 // Executes at a specified time interval
 // setInterval(() => {
 // 	console.log('Code activated');
+// }, 1000);
+
+// Timer solution proposal #1 (Not recommended)
+// setInterval(() => {
+// 	seconds = seconds - 1;
+
+// 	if (seconds >= 0) {
+// 		timer.innerText = seconds;
+// 	}
+
+// 	console.log('Hello');
+// 	if (seconds === 0) clearInterval(id);
 // }, 1000);
