@@ -9,11 +9,10 @@ const playerChoice = document.getElementById('player-1-option');
 const computerChoice = document.getElementById('computer-choice');
 const playerVictories = document.getElementById('player-victories');
 const computerVictories = document.getElementById('computer-victories');
-
 const playerCards = document.querySelectorAll('.player-card');
 const timer = document.getElementById('timer');
 
-// Variables
+// Game obj
 const game = {
 	started: false,
 	playerChoice: 'paper',
@@ -39,47 +38,45 @@ const startTimer = (seconds = 5) => {
 	}, 1000);
 };
 
+const chooseWinner = winner => {
+	if (winner === 'player') {
+		// PLayer wins
+		alert('Player 1 wins!');
+		game.playerVictories += 1;
+		playerVictories.innerText = game.playerVictories;
+	} else if (winner === 'computer') {
+		// PLayer wins
+		alert('Player 2 wins!');
+		game.computerVictories += 1;
+		computerVictories.innerText = game.playerVictories;
+	}
+};
+
 const endGame = () => {
 	if (!game.started) return;
 
 	// Decide who wins
-	if (game.playerChoice === 'paper' && game.computerChoice === 'rock') {
-		alert('Player 1 wins!');
-		game.playerVictories += 1;
-	} else if (
-		game.playerChoice === 'rock' &&
-		game.computerChoice === 'scissors'
-	) {
-		alert('Player 1 wins!');
-		game.playerVictories += 1;
-	} else if (
-		game.playerChoice === 'scissors' &&
-		game.computerChoice === 'paper'
-	) {
-		alert('Player 1 wins!');
-		game.playerVictories += 1;
-	} else if (game.playerChoice === game.computerChoice) {
+	if (game.playerChoice === 'paper' && game.computerChoice === 'rock')
+		chooseWinner('player');
+	else if (game.playerChoice === 'rock' && game.computerChoice === 'scissors')
+		chooseWinner('player');
+	else if (game.playerChoice === 'scissors' && game.computerChoice === 'paper')
+		chooseWinner('player');
+	else if (game.playerChoice === game.computerChoice) {
 		alert('Tie');
-	} else {
-		alert('Player 2 wins');
-		game.computerVictories += 1;
-	}
-
-	// Update the victories counter
-	playerVictories.innerText = game.playerVictories;
-	computerVictories.innerText = game.computerVictories;
+	} else chooseWinner('computer');
 
 	// Reset timer HTML element
 	timer.innerText = 5;
+	game.remainingSeconds = 5;
 
 	// Remove disable class from start and reset button and disable stop button
 	btnStart.classList.remove('disabled');
 	btnReset.classList.remove('disabled');
 	btnStop.classList.add('disabled');
 
-	// Mark game.started as false
+	// Mark game started as false
 	game.started = false;
-	game.remainingSeconds = 5;
 };
 
 const startRandomComputerChoice = () => {
@@ -141,26 +138,21 @@ btnStart.addEventListener('click', () => {
 	startTimer();
 });
 
-btnRock.addEventListener('click', () => {
-	removeSelectedOption();
-	btnRock.classList.add('selected');
-	playerChoice.src = './assets/rock.png';
-	game.playerChoice = 'rock';
-});
+const optionClickHandler = event => {
+	const option = event.target.dataset.option;
 
-btnPaper.addEventListener('click', () => {
 	removeSelectedOption();
-	btnPaper.classList.add('selected');
-	playerChoice.src = './assets/paper.png';
-	game.playerChoice = 'paper';
-});
 
-btnScissors.addEventListener('click', () => {
-	removeSelectedOption();
-	btnScissors.classList.add('selected');
-	playerChoice.src = './assets/scissors.png';
-	game.playerChoice = 'scissors';
-});
+	event.target.classList.add('selected');
+
+	playerChoice.src = `./assets/${option}.png`;
+	game.playerChoice = option;
+};
+
+// Player's choice handlers
+btnRock.addEventListener('click', optionClickHandler);
+btnPaper.addEventListener('click', optionClickHandler);
+btnScissors.addEventListener('click', optionClickHandler);
 
 // Cancel the game
 btnStop.addEventListener('click', () => {
@@ -183,6 +175,29 @@ btnStop.addEventListener('click', () => {
 	timer.innerHTML = 5;
 	game.remainingSeconds = 5;
 });
+
+btnReset.addEventListener('click', () => {
+	if (game.started) return;
+
+	const userAnswer = prompt('Are you sure? (y/n)');
+
+	if (userAnswer === 'n') {
+		alert('Game has not been reseted');
+	} else if (userAnswer === 'y') {
+		// Reset victories counters
+		game.playerVictories = 0;
+		game.computerVictories = 0;
+
+		// Update the HTML
+		playerVictories.innerText = 0;
+		computerVictories.innerText = 0;
+		alert('Game has been reseted');
+	} else {
+		alert('Only input y or n for yes or no');
+	}
+});
+
+// Most used events: click, change, focus, blur, keypress
 
 // 1s = 1000 ms
 // Executes only when the specified time has passed
