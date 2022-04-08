@@ -15,6 +15,7 @@ const timer = document.getElementById('timer');
 const game = {
 	started: false,
 	playerChoice: 'paper',
+	computerChoice: 'rock',
 	remainingSeconds: 5,
 };
 
@@ -28,19 +29,56 @@ const startTimer = (seconds = 5) => {
 		if (remainingSeconds >= 0) {
 			timer.innerText = remainingSeconds;
 			startTimer(remainingSeconds);
+		} else {
+			endGame();
 		}
 	}, 1000);
+};
+
+const endGame = () => {
+	if (game.playerChoice === 'paper' && game.computerChoice === 'rock') {
+		alert('Player 1 wins!');
+	} else if (
+		game.playerChoice === 'rock' &&
+		game.computerChoice === 'scissors'
+	) {
+		alert('Player 1 wins!');
+	} else if (
+		game.playerChoice === 'scissors' &&
+		game.computerChoice === 'paper'
+	) {
+		alert('Player 1 wins!');
+	} else if (game.playerChoice === game.computerChoice) {
+		alert('Tie');
+	} else {
+		alert('Player 2 wins');
+	}
 };
 
 const startRandomComputerChoice = () => {
 	setTimeout(() => {
 		// Generate random number between 1-3
+		const randomOption = Math.floor(Math.random() * 3) + 1;
+
 		// 1 - Rock
 		// 2 - Paper
 		// 3 - Scissors
+
 		// Change the computer choice based on the random number generated
+		if (randomOption === 1) {
+			computerChoice.src = './assets/rock.png';
+			game.computerChoice = 'rock';
+		} else if (randomOption === 2) {
+			computerChoice.src = './assets/paper.png';
+			game.computerChoice = 'paper';
+		} else if (randomOption === 3) {
+			computerChoice.src = './assets/scissors.png';
+			game.computerChoice = 'scissors';
+		}
+
 		// When timer reaches to 0, stop random choice
-	}, 1000);
+		if (game.remainingSeconds > 0) startRandomComputerChoice();
+	}, 100);
 };
 
 const startGame = () => {
@@ -80,18 +118,21 @@ btnRock.addEventListener('click', () => {
 	removeSelectedOption();
 	btnRock.classList.add('selected');
 	playerChoice.src = './assets/rock.png';
+	game.playerChoice = 'rock';
 });
 
 btnPaper.addEventListener('click', () => {
 	removeSelectedOption();
 	btnPaper.classList.add('selected');
 	playerChoice.src = './assets/paper.png';
+	game.playerChoice = 'paper';
 });
 
 btnScissors.addEventListener('click', () => {
 	removeSelectedOption();
 	btnScissors.classList.add('selected');
 	playerChoice.src = './assets/scissors.png';
+	game.playerChoice = 'scissors';
 });
 
 // 1s = 1000 ms
