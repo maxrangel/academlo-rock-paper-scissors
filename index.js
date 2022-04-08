@@ -7,6 +7,8 @@ const btnPaper = document.getElementById('btn-paper');
 const btnScissors = document.getElementById('btn-scissors');
 const playerChoice = document.getElementById('player-1-option');
 const computerChoice = document.getElementById('computer-choice');
+const playerVictories = document.getElementById('player-victories');
+const computerVictories = document.getElementById('computer-victories');
 
 const playerCards = document.querySelectorAll('.player-card');
 const timer = document.getElementById('timer');
@@ -17,6 +19,8 @@ const game = {
 	playerChoice: 'paper',
 	computerChoice: 'rock',
 	remainingSeconds: 5,
+	playerVictories: 0,
+	computerVictories: 0,
 };
 
 // Default parameters
@@ -26,7 +30,7 @@ const startTimer = (seconds = 5) => {
 		game.remainingSeconds = remainingSeconds;
 
 		// Recursividad / Recursivity
-		if (remainingSeconds >= 0) {
+		if (remainingSeconds >= 0 && game.started) {
 			timer.innerText = remainingSeconds;
 			startTimer(remainingSeconds);
 		} else {
@@ -36,23 +40,46 @@ const startTimer = (seconds = 5) => {
 };
 
 const endGame = () => {
+	if (!game.started) return;
+
+	// Decide who wins
 	if (game.playerChoice === 'paper' && game.computerChoice === 'rock') {
 		alert('Player 1 wins!');
+		game.playerVictories += 1;
 	} else if (
 		game.playerChoice === 'rock' &&
 		game.computerChoice === 'scissors'
 	) {
 		alert('Player 1 wins!');
+		game.playerVictories += 1;
 	} else if (
 		game.playerChoice === 'scissors' &&
 		game.computerChoice === 'paper'
 	) {
 		alert('Player 1 wins!');
+		game.playerVictories += 1;
 	} else if (game.playerChoice === game.computerChoice) {
 		alert('Tie');
 	} else {
 		alert('Player 2 wins');
+		game.computerVictories += 1;
 	}
+
+	// Update the victories counter
+	playerVictories.innerText = game.playerVictories;
+	computerVictories.innerText = game.computerVictories;
+
+	// Reset timer HTML element
+	timer.innerText = 5;
+
+	// Remove disable class from start and reset button and disable stop button
+	btnStart.classList.remove('disabled');
+	btnReset.classList.remove('disabled');
+	btnStop.classList.add('disabled');
+
+	// Mark game.started as false
+	game.started = false;
+	game.remainingSeconds = 5;
 };
 
 const startRandomComputerChoice = () => {
@@ -77,7 +104,7 @@ const startRandomComputerChoice = () => {
 		}
 
 		// When timer reaches to 0, stop random choice
-		if (game.remainingSeconds > 0) startRandomComputerChoice();
+		if (game.remainingSeconds > 0 && game.started) startRandomComputerChoice();
 	}, 100);
 };
 
@@ -133,6 +160,28 @@ btnScissors.addEventListener('click', () => {
 	btnScissors.classList.add('selected');
 	playerChoice.src = './assets/scissors.png';
 	game.playerChoice = 'scissors';
+});
+
+// Cancel the game
+btnStop.addEventListener('click', () => {
+	if (!game.started) return;
+
+	game.started = false;
+
+	// Hide the players' cards
+	playerCards.forEach(element => {
+		// Add the hidden class from each element
+		element.classList.add('hidden');
+	});
+
+	// Disable stop btn
+	btnStart.classList.remove('disabled');
+	btnReset.classList.remove('disabled');
+	btnStop.classList.add('disabled');
+
+	// Reset timers
+	timer.innerHTML = 5;
+	game.remainingSeconds = 5;
 });
 
 // 1s = 1000 ms
