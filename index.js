@@ -1,4 +1,11 @@
 // DOM - Document Object Model (Modelo del Objeto documento)
+
+// How to fetch an element
+// document.querySelector('.class'); Get the first HTML element that finds by class
+// document.querySelector('#id'); Get the first HTML element that finds by id
+// document.getElementById('id')
+// document.querySelectorAll('.class') Gets all elements with the given class and returns an array of elements
+
 const btnStart = document.getElementById('btn-start');
 const btnStop = document.getElementById('btn-stop');
 const btnReset = document.getElementById('btn-reset');
@@ -123,8 +130,10 @@ const removeSelectedOption = () => {
 };
 
 // Events listeners
+// We can set events to our HTML elements and tell them to do something
 
 // Callback/anonymous functions
+// A callback function is a function that is waiting to be executed, it doesn't execute immediately
 btnStart.addEventListener('click', () => {
 	if (game.started) return;
 
@@ -219,5 +228,5 @@ btnReset.addEventListener('click', () => {
 // 	}
 
 // 	console.log('Hello');
-// 	if (seconds === 0) clearInterval(id);
+// 	// if (seconds === 0) clearInterval(id);
 // }, 1000);
